@@ -1,13 +1,11 @@
 import axios from 'axios';
 import { useState, useEffect } from 'react';
-import { styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import Typography from '@mui/material/Typography';
+
+import AnimeCard from '../components/AnimeCard';
 
 const axiosInstance = axios.create({ baseURL: 'http://localhost:3000/' });
 
@@ -47,20 +45,13 @@ const Home = () => {
         <Paper elevation={2}>
           <Box display="flex" justifyContent="space-around" flexWrap="wrap" padding={2}>
             {animeData.map(({ mal_id, title, type, score, images }) => (
-              <Card style={{ maxWidth: '300px', height: '500px', marginBottom: '30px' }} key={mal_id}>
-                <CardContent>
-                  <Typography variant="body2" color="text.secondary">
-                    {`Title: ${title}`}
-                  </Typography>
-                  <img src={images.jpg.image_url} />
-                  <Typography variant="body2" color="text.secondary">
-                    {`Type: ${type}`}
-                  </Typography>
-                  <Typography variant="body2" color="text.secondary">
-                  {`Score: ${score}`}
-                  </Typography>
-                </CardContent>
-              </Card>d
+              <AnimeCard
+                key={mal_id}
+                title={title}
+                imageUrl={images.jpg.image_url}
+                type={type}
+                score={score}
+              />
             ))}
           </Box>
         </Paper>
