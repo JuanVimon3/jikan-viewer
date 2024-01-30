@@ -4,7 +4,7 @@ const axios = require('axios');
 const app = express();
 const port = 4000;
 
-const axiosInstance = axios.create({ baseURL: 'https://api.jikan.moe/v4' }); 
+const axiosInstance = axios.create({ baseURL: 'https://api.jikan.moe/v4' });
 
 app.get('/anime/search', async (req, res) => {
   const { q } = req.query;
@@ -12,7 +12,7 @@ app.get('/anime/search', async (req, res) => {
     params: { q },
   });
   const averageScore = data.data.reduce((acc, current) => current.score + acc, 0) / data.data.length;
-  return res.json({ ...data, averageScore });
+  return res.json({ ...data, averageScore: Math.round(averageScore * 100) / 100 });
 });
 
 app.listen(port, () => {
