@@ -12,12 +12,14 @@ const axiosInstance = axios.create({ baseURL: 'http://localhost:3000/' });
 const Home = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [animeData, setAnimeData] = useState([]);
+  const [averageScore, setAverageScore] = useState();
 
   const fetchAndUpdateData = async () => {
     const { data } = await axiosInstance.get('/anime/search', {
       params: { q: searchTerm },
     });
     setAnimeData(data.data);
+    setAverageScore(data.averageScore)
   };
 
   useEffect(() => {
@@ -40,6 +42,9 @@ const Home = () => {
         <Button variant="contained" size='large' onClick={fetchAndUpdateData}>
           Send
         </Button>
+          <Box marginLeft={2}>
+            <h4>Average Score: {averageScore}</h4>
+          </Box>
       </Box>
       <Box marginTop={2}>
         <Paper elevation={2}>
