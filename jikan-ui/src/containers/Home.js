@@ -22,6 +22,11 @@ const Home = () => {
     setAverageScore(data.averageScore)
   };
 
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      fetchAndUpdateData();
+    }
+  }
   useEffect(() => {
     fetchAndUpdateData();
   }, []);
@@ -37,6 +42,7 @@ const Home = () => {
             fullWidth
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
+            onKeyDown={handleKeyDown}
           />
         </Box>
         <Button variant="contained" size='large' onClick={fetchAndUpdateData}>
